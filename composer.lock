@@ -4,8 +4,48 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b7904d07d1e1765a0a199aa11d6301a3",
+    "content-hash": "82e64c3ce3c697a085b92c77b29274ec",
     "packages": [
+        {
+            "name": "artesaos/migrator",
+            "version": "1.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/artesaos/migrator.git",
+                "reference": "6d800ddf396006598e9c73b308c704d8a0e0ab9e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/artesaos/migrator/zipball/6d800ddf396006598e9c73b308c704d8a0e0ab9e",
+                "reference": "6d800ddf396006598e9c73b308c704d8a0e0ab9e",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Migrator\\MigrationServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Migrator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Diego Hernandes",
+                    "email": "diego@hernandev.com"
+                }
+            ],
+            "description": "Namespaced Migrations for Laravel 5.1+",
+            "time": "2017-11-28T13:05:12+00:00"
+        },
         {
             "name": "dnoegel/php-xdg-base-dir",
             "version": "0.1",

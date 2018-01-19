@@ -165,8 +165,10 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
-         * Package Service Providers...
+         * Migrations Service Providers...
          */
+        Migrator\MigrationServiceProvider::class,
+        \App\Domains\Doctor\Providers\DoctorMigrationsServiceProvider::class,
 
         /*
          * Application Service Providers...
