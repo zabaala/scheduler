@@ -5,6 +5,7 @@ namespace Tests\Scheduler;
 use App\Domains\Doctor\DbDoctorRepository;
 use App\Domains\Doctor\Doctor;
 use App\Support\CRMGenerator;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 
 class DatabaseDoctorRepositoryTest extends BaseTest
@@ -45,5 +46,40 @@ class DatabaseDoctorRepositoryTest extends BaseTest
         $this->assertEquals($cpf, $doctor->cpf);
         $this->assertEquals($crm, $doctor->crm);
         $this->assertEquals($specialty, $doctor->specialty);
+    }
+
+    public function test_update_a_doctor()
+    {
+        $name = $this->faker->name;
+        $email = $this->faker->unique()->email;
+        $cpf = $this->faker->cpf;
+        $crm = CRMGenerator::generate();
+        $specialty = $this->faker->sentence(1, false);
+
+        $doctor = $this->repository->createNewDoctor($name, $email, $cpf, $crm, $specialty);
+
+        $newName = $this->faker->name;
+        $newEmail = $this->faker->unique()->email;
+        $newCpf = $this->faker->cpf;
+        $newCrm = CRMGenerator::generate();
+        $newSpecialty = $this->faker->sentence(1, false);
+
+        $updatedDoctor = $this->repository->updateDoctorById($doctor->id, $newName, $newEmail, $newCpf, $newCrm, $newSpecialty);
+
+        $this->assertInstanceOf(Doctor::class, $updatedDoctor);
+
+        $this->assertEquals($newName, $updatedDoctor->name);
+        $this->assertEquals($newEmail, $updatedDoctor->email);
+        $this->assertEquals($newCpf, $updatedDoctor->cpf);
+        $this->assertEquals($newCrm, $updatedDoctor->crm);
+        $this->assertEquals($newSpecialty, $updatedDoctor->specialty);
+    }
+
+    /**
+     * @expectedException \Illuminate\Database\Eloquent\ModelNotFoundException
+     */
+    public function test_find_by_id_a_non_existent_doctor()
+    {
+        $this->repository->findDoctorById(999);
     }
 }
