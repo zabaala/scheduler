@@ -1,0 +1,29 @@
+# v2 syntax
+version: '2'
+
+volumes:
+  scheduler-mysql-data:
+      driver: local
+
+services:
+  mysql:
+      image: ambientum/mysql:5.7
+      container_name: scheduler-mysql
+      volumes:
+        - scheduler-mysql-data:/var/lib/mysql
+      ports:
+        - "3306:3306"
+      environment:
+        - MYSQL_ROOT_PASSWORD=schedulerapp
+        - MYSQL_DATABASE=schedulerapp
+        - MYSQL_USER=schedulerapp
+        - MYSQL_PASSWORD=schedulerapp
+
+  # PHP (with Caddy)
+  app:
+    image: ambientum/php:7.0-nginx
+    container_name: scheduler-app
+    volumes:
+      - .:/var/www/app
+    ports:
+      - "8000:8080"
