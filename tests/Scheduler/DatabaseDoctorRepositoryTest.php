@@ -5,35 +5,22 @@ namespace Tests\Scheduler;
 use App\Domains\Doctor\DbDoctorRepository;
 use App\Domains\Doctor\Doctor;
 use App\Support\CRMGenerator;
-use Faker\Factory as Faker;
-use JansenFelipe\FakerBR\FakerBR;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class DatabaseDoctorRepositoryTest extends TestCase
+
+class DatabaseDoctorRepositoryTest extends BaseTest
 {
-    use RefreshDatabase;
-
     /**
      * @var DbDoctorRepository
      */
     private $repository;
 
     /**
-     * @var Faker
+     * Setting up test.
      */
-    private $faker;
-
     public function setUp()
     {
         parent::setUp();
-
-        $this->artisan('migrator');
-
         $this->repository  = new DbDoctorRepository(new Doctor());
-
-        $this->faker = Faker::create();
-        $this->faker->addProvider(new FakerBR($this->faker));
     }
 
     /**
