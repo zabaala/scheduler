@@ -1,13 +1,12 @@
 <?php
 
 use App\Support\CRMGenerator;
-use Faker\Factory as Faker;
+use Faker\Generator as Faker;
 use JansenFelipe\FakerBR\FakerBR;
 
 $factory->define(\App\Domains\Doctor\Doctor::class, function (Faker $faker) {
 
-    $this->faker = Faker::create();
-    $this->faker->addProvider(new FakerBR($this->faker));
+    $faker->addProvider(new FakerBR($faker));
 
     return [
         'name' => $faker->name,

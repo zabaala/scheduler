@@ -5,7 +5,7 @@ namespace Tests\Scheduler;
 use App\Domains\Doctor\DbDoctorRepository;
 use App\Domains\Doctor\Doctor;
 use App\Support\CRMGenerator;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 
 class DatabaseDoctorRepositoryTest extends BaseTest
@@ -22,6 +22,17 @@ class DatabaseDoctorRepositoryTest extends BaseTest
     {
         parent::setUp();
         $this->repository  = new DbDoctorRepository(new Doctor());
+    }
+
+    public function test_get_all_doctors()
+    {
+        factory(Doctor::class, 20)->create();
+
+        $doctors = $this->repository->getAll();
+
+        $this->assertInstanceOf(LengthAwarePaginator::class, $doctors);
+
+        $this->assertEquals(20, $doctors->total());
     }
 
     /**
@@ -46,6 +57,25 @@ class DatabaseDoctorRepositoryTest extends BaseTest
         $this->assertEquals($cpf, $doctor->cpf);
         $this->assertEquals($crm, $doctor->crm);
         $this->assertEquals($specialty, $doctor->specialty);
+    }
+
+    /**
+     * @expectedException \Illuminate\Database\Eloquent\ModelNotFoundException
+     */
+    public function test_find_by_id_a_non_existent_doctor()
+    {
+        $this->repository->findDoctorById(999);
+    }
+
+    public function test_find_doctor_by_id()
+    {
+        $doctors = factory(Doctor::class, 3)->create();
+
+        $factoryDoctor = $doctors[2];
+
+        $doctor = $this->repository->findDoctorById($factoryDoctor->id);
+
+        $this->assertEquals($factoryDoctor->name, $doctor->name);
     }
 
     public function test_update_a_doctor()
@@ -78,8 +108,16 @@ class DatabaseDoctorRepositoryTest extends BaseTest
     /**
      * @expectedException \Illuminate\Database\Eloquent\ModelNotFoundException
      */
-    public function test_find_by_id_a_non_existent_doctor()
+    public function test_delete_a_non_existent_doctor()
     {
-        $this->repository->findDoctorById(999);
+        $this->repository->deleteDoctorById(957);
+    }
+
+    public function test_delete_a_existent_doctor()
+    {
+        $result = $this->repository->deleteDoctorById(1);
+
+        $this->assertTrue($result);
+        $this->assertEquals(19, $this->repository->getAll()->total());
     }
 }
