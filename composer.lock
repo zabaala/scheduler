@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "82e64c3ce3c697a085b92c77b29274ec",
+    "content-hash": "7843e513305c0a38d737bf8b1b8a6a6b",
     "packages": [
         {
             "name": "artesaos/migrator",
@@ -2478,6 +2478,61 @@
                 "test"
             ],
             "time": "2016-01-20T08:20:44+00:00"
+        },
+        {
+            "name": "jansenfelipe/faker-br",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jansenfelipe/faker-br.git",
+                "reference": "219eb281e3d8f76c2463f4e38e0ee0c0c96be2d4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jansenfelipe/faker-br/zipball/219eb281e3d8f76c2463f4e38e0ee0c0c96be2d4",
+                "reference": "219eb281e3d8f76c2463f4e38e0ee0c0c96be2d4",
+                "shasum": ""
+            },
+            "require": {
+                "fzaninotto/faker": "^1.5"
+            },
+            "require-dev": {
+                "jansenfelipe/utils": "^2.0",
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "jansenfelipe/cep-gratis": "Permite consulta de CEP no site dos Correios",
+                "jansenfelipe/cnpj-gratis": "Permite consulta de CNPJ no site dos Correios",
+                "jansenfelipe/cpf-gratis": "Permite consulta de CPF no site da receita"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "JansenFelipe\\FakerBR\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jansen Felipe",
+                    "email": "jansen.felipe@gmail.com"
+                }
+            ],
+            "description": "Provider do Faker para gerar dados brasileiros falsos com o intuito de testar softwares",
+            "keywords": [
+                "cnpj",
+                "cpf",
+                "gerador"
+            ],
+            "time": "2015-12-02T18:14:35+00:00"
         },
         {
             "name": "mockery/mockery",
