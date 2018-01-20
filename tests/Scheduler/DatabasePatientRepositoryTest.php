@@ -104,6 +104,8 @@ class DatabasePatientRepositoryTest extends BaseTest
 
     public function test_delete_a_existent_patient()
     {
+        Patient::query()->truncate();
+
         $patients = factory(Patient::class, 1)->create();
 
         $result = $this->repository->deletePatientById($patients->get(0)->id);
