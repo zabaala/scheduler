@@ -169,6 +169,7 @@ return [
          */
         Migrator\MigrationServiceProvider::class,
         \App\Domains\Doctor\Providers\DoctorMigrationsServiceProvider::class,
+        \App\Domains\Patient\Providers\PatientMigrationsServiceProvider::class,
 
         /*
          * Application Service Providers...
