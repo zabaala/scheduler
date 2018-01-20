@@ -15,10 +15,9 @@ class ApiV1ServiceProvider extends ServiceProvider
     protected $namespace = 'App\Applications\Api\V1\Http\Controllers';
 
     /**
-     * Boot the service provider.
-     * @param Router $route
+     * Boot API routes.
      */
-        public function map()
+    public function map()
     {
         Route::prefix('api/v1')
             ->namespace($this->namespace)
