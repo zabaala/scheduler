@@ -40,6 +40,3 @@ test:
   script:
   # run laravel tests
   - php vendor/bin/phpunit -v --coverage-text --colors=always --stderr --coverage-xml build/coverage-xml/ 
-  
-after_script:
-  - php vendor/bin/codacycoverage phpunit
