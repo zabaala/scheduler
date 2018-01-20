@@ -115,9 +115,13 @@ class DatabaseDoctorRepositoryTest extends BaseTest
 
     public function test_delete_a_existent_doctor()
     {
-        $result = $this->repository->deleteDoctorById(1);
+        Doctor::query()->truncate();
+
+        $patients = factory(Doctor::class, 1)->create();
+
+        $result = $this->repository->deleteDoctorById($patients->get(0)->id);
 
         $this->assertTrue($result);
-        $this->assertEquals(19, $this->repository->getAll()->total());
+        $this->assertEquals(0, $this->repository->getAll()->total());
     }
 }
