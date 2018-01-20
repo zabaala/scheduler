@@ -18,16 +18,10 @@ class ApiV1ServiceProvider extends ServiceProvider
      * Boot the service provider.
      * @param Router $route
      */
-    public function boot(Router $route)
+        public function map()
     {
-        $options = [
-            'namespace' => $this->namespace,
-            'prefix' => 'api/v1',
-            'as' => 'ap1.v1.'
-        ];
-
-        $route->group($options, function(){
-            require app_path('Applications/Api/v1/Http/routes.php');
-        });
+        Route::prefix('api/v1')
+            ->namespace($this->namespace)
+            ->group(base_path('app/Applications/Api/V1/Http/routes.php'));
     }
 }
