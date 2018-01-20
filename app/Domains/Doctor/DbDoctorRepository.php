@@ -35,6 +35,7 @@ class DbDoctorRepository
                 'doctors.email',
                 'doctors.cpf',
             ])
+            ->whereRaw('(doctors.deleted_at is null or doctors.deleted_at = "")')
             ->paginate($this->perPage);
     }
 
@@ -72,9 +73,13 @@ class DbDoctorRepository
      */
     public function findDoctorById($id)
     {
-        $doctor = $this->model->find($id);
+        $doctor = $this
+            ->model
+            ->whereRaw('(doctors.deleted_at is null or doctors.deleted_at = "")')
+            ->whereId($id)
+            ->first();
 
-        if (!$doctor) {
+        if (! $doctor) {
             throw new ModelNotFoundException("Doctor with id: ${id} not found.");
         }
 
