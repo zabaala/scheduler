@@ -49,6 +49,11 @@
                 font-size: 84px;
             }
 
+            .title>small{
+                display: block;
+                font-size: 24px;
+            }
+
             .links > a {
                 color: #636b6f;
                 padding: 0 25px;
@@ -61,6 +66,9 @@
 
             .m-b-md {
                 margin-bottom: 30px;
+            }
+            .badges{
+                margin-top: 30px;
             }
         </style>
     </head>
@@ -79,15 +87,20 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Scheduler
+                    <small>by Mauricio Rodrigues</small>
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="{{ route('backend.register') }}">Try it!</a>
+                    <a href="https://gitlab.com/zabaala/scheduler/" target="_blank">View Source</a>
+                    <a href="https://www.linkedin.com/in/mauriciovsr/" target="_blank">LinkedIn Profile</a>
+                    <a href="https://github.com/zabaala" target="_blank">Github Profile</a>
+                </div>
+
+                <div class="badges">
+                    <a href="https://gitlab.com/zabaala/scheduler/badges/challenge/" target="_blank"><img src="https://gitlab.com/zabaala/scheduler/badges/challenge/build.svg" alt=""></a>
+                    <a class="badge-align" href="https://www.codacy.com/app/zabaala/scheduler?utm_source=gitlab.com&amp;utm_medium=referral&amp;utm_content=zabaala/scheduler&amp;utm_campaign=Badge_Grade" target="_blank"><img src="https://api.codacy.com/project/badge/Grade/40a57d730910461a8d5f00011c1347b9"/></a>
                 </div>
             </div>
         </div>
