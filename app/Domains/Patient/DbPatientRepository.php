@@ -123,7 +123,9 @@ class DbPatientRepository implements PatientRepositoryInterface
     public function deletePatientById($id)
     {
         if ($model = $this->findPatientById($id)) {
-            return $model->delete();
+            $model->deleted_at = now()->toDateTimeString();
+            $model->save();
+            return true;
         }
 
         return false;

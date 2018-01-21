@@ -170,6 +170,7 @@ return [
         Migrator\MigrationServiceProvider::class,
         \App\Domains\Doctor\Providers\DoctorMigrationsServiceProvider::class,
         \App\Domains\Patient\Providers\PatientMigrationsServiceProvider::class,
+        \App\Domains\Schedule\Providers\ScheduleMigrationsServiceProvider::class,
 
         /*
          * Application Service Providers...

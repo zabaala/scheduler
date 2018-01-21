@@ -120,7 +120,9 @@ class DbDoctorRepository
     public function deleteDoctorById($id)
     {
         if ($model = $this->findDoctorById($id)) {
-            return $model->delete();
+            $model->deleted_at = now()->toDateTimeString();
+            $model->save();
+            return true;
         }
 
         return false;
