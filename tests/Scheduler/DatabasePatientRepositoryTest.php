@@ -104,7 +104,9 @@ class DatabasePatientRepositoryTest extends BaseTest
 
     public function test_delete_a_existent_patient()
     {
+        \Schema::disableForeignKeyConstraints();
         Patient::query()->truncate();
+        \Schema::enableForeignKeyConstraints();
 
         $patients = factory(Patient::class, 1)->create();
 
