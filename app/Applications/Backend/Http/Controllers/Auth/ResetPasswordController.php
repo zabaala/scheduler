@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Http\Controllers\Auth;
+namespace App\Applications\Backend\Http\Controllers\Auth;
 
 use App\Core\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
@@ -25,7 +25,7 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/backend/home';
 
     /**
      * Create a new controller instance.

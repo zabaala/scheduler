@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Core\Http\Controllers\Auth;
+namespace App\Applications\Backend\Http\Controllers\Auth;
 
 use App\Core\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use App\Support\Auth\SendsPasswordResetEmails;
 
 class ForgotPasswordController extends Controller
 {

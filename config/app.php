@@ -179,12 +179,13 @@ return [
         App\Core\Providers\AuthServiceProvider::class,
         // App\Core\Providers\BroadcastServiceProvider::class,
         App\Core\Providers\EventServiceProvider::class,
-        App\Core\Providers\RouteServiceProvider::class,
+//        App\Core\Providers\RouteServiceProvider::class,
 
         /*
          * Others providers...
          */
         \App\Applications\Api\V1\Providers\ApiV1ServiceProvider::class,
+        \App\Applications\Backend\Providers\BackendServiceProvider::class
     ],
 
     /*
