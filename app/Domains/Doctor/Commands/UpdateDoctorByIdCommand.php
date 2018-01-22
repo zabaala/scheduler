@@ -7,6 +7,7 @@ use App\Domains\Doctor\Doctor;
 use App\Domains\Doctor\Validations\CreateNewDoctorValidation;
 use App\Domains\Doctor\Validations\UpdateDoctorByIdValidation;
 use App\Support\Command\Command;
+use App\Support\Cpf;
 
 class UpdateDoctorByIdCommand extends Command
 {
@@ -25,6 +26,7 @@ class UpdateDoctorByIdCommand extends Command
     public function __construct($id, $data)
     {
         $data['id'] = $id;
+        $data['cpf'] = (new Cpf($data['cpf']))->clean();
 
         parent::__construct($data);
         $this->data = collect($data);
