@@ -48,7 +48,11 @@ abstract class Command
             $class = $this->$method();
             (new $class($this->data))->validate();
         } catch (ValidationException $validationException) {
-            $this->error = new Error($validationException->getMessages(), $validationException->getCode(), ValidationException::class);
+            $this->error = new Error(
+                $validationException->getMessages(),
+                $validationException->getCode(),
+                ValidationException::class);
+
             $this->fails = true;
         }
     }
