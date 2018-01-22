@@ -38,7 +38,7 @@ final class Error
      */
     public function getCode()
     {
-        return $this->getCode();
+        return $this->code;
     }
 
     /**
@@ -51,7 +51,7 @@ final class Error
 
     public function getType()
     {
-        return $this->getType();
+        return $this->type;
     }
 
     /**
