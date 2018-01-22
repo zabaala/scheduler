@@ -2,13 +2,12 @@
 
 namespace App\Support\Command;
 
-use App\Support\ValueObjects\Error;
 use Illuminate\Support\MessageBag;
 
 class CommandException extends \Exception
 {
     /**
-     * @var Error
+     * @var MessageBag
      */
     private $error;
 
@@ -35,7 +34,7 @@ class CommandException extends \Exception
     }
 
     /**
-     * @return Error
+     * @return MessageBag
      */
     public function getError()
     {
