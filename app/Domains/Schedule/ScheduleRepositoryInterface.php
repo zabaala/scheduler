@@ -56,5 +56,4 @@ interface ScheduleRepositoryInterface
      * @return bool
      */
     public function deleteScheduleById($id);
-
 }

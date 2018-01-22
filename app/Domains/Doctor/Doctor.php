@@ -19,5 +19,4 @@ class Doctor extends Model
      * @var array
      */
     public $dates = ['created_at', 'updated_at', 'deleted_at'];
-
 }

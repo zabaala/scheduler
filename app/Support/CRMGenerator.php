@@ -41,7 +41,7 @@ class CRMGenerator
      * Generate dynamic Doctor CRM.
      * @return string
      */
-    static public function generate()
+    public static function generate()
     {
         $faker = new Faker();
         $faker->addProvider(new FakerBR($faker));
