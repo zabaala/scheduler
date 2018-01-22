@@ -10,10 +10,6 @@ class UpdateDoctorByIdValidation extends Validation
      * @var $data
      */
     protected $data;
-    /**
-     * @var
-     */
-    private $id;
 
     /**
      * CreateNewDoctorValidation constructor.
