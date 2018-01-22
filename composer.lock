@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9243c9a30534009526dd8c3c338dcf3a",
+    "content-hash": "08b44743339ec0ca6f97fce821b1a080",
     "packages": [
         {
             "name": "artesaos/migrator",
@@ -358,6 +358,53 @@
                 "trusted proxy"
             ],
             "time": "2017-06-15T17:19:42+00:00"
+        },
+        {
+            "name": "illuminate/html",
+            "version": "v5.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/illuminate/html.git",
+                "reference": "3d1009bb8e0f25720c914af5c1f4015dd373c9ef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/illuminate/html/zipball/3d1009bb8e0f25720c914af5c1f4015dd373c9ef",
+                "reference": "3d1009bb8e0f25720c914af5c1f4015dd373c9ef",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/http": "~5.0",
+                "illuminate/session": "~5.0",
+                "illuminate/support": "~5.0",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Illuminate\\Html\\": ""
+                },
+                "files": [
+                    "helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylorotwell@gmail.com"
+                }
+            ],
+            "abandoned": "laravelcollective/html",
+            "time": "2015-01-01T16:31:18+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -2261,6 +2308,42 @@
                 "environment"
             ],
             "time": "2016-09-01T10:05:43+00:00"
+        },
+        {
+            "name": "zabaala/bootstrapme",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zabaala/bootstrapme.git",
+                "reference": "290a8e880bccf315acc999803fafc1b9d9c83d69"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zabaala/bootstrapme/zipball/290a8e880bccf315acc999803fafc1b9d9c83d69",
+                "reference": "290a8e880bccf315acc999803fafc1b9d9c83d69",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/html": "^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Zabaala\\Bootstrapme\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mauricio Rodrigues",
+                    "email": "mauricio.vsr@gmail.com"
+                }
+            ],
+            "description": "Put your Laravel 5 in action and allow that him use the Bootstrap to make form-groups",
+            "time": "2017-10-25T12:23:54+00:00"
         }
     ],
     "packages-dev": [
@@ -4097,7 +4180,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "zabaala/bootstrapme": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

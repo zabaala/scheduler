@@ -186,7 +186,8 @@ return [
          */
         \App\Support\Validation\Custom\CustomValidationsServiceProvider::class,
         \App\Applications\Api\V1\Providers\ApiV1ServiceProvider::class,
-        \App\Applications\Backend\Providers\BackendServiceProvider::class
+        \App\Applications\Backend\Providers\BackendServiceProvider::class,
+        Zabaala\Bootstrapme\BootstrapmeServiceProvider::class,
 
     ],
 
@@ -236,6 +237,12 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        /*
+         * Others aliases...
+         */
+        'Form' => Illuminate\Html\FormFacade::class,
+        'Html' => Illuminate\Html\HtmlFacade::class,
 
     ],
 
