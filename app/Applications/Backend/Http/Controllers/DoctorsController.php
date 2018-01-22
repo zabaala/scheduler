@@ -3,8 +3,11 @@
 namespace App\Applications\Backend\Http\Controllers;
 
 use App\Core\Http\Controllers\Controller;
+use App\Domains\Doctor\Commands\CreateNewDoctorCommand;
 use App\Domains\Doctor\DbDoctorRepository;
 use App\Domains\Doctor\Doctor;
+use App\Support\Command\CommandException;
+use Illuminate\Http\Request;
 
 class DoctorsController extends Controller
 {
@@ -39,5 +42,21 @@ class DoctorsController extends Controller
         $doctor = null;
         $action = 'create';
         return view('backend::doctors.form', compact('doctor', 'action'));
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(Request $request)
+    {
+        try {
+            $command = new CreateNewDoctorCommand($request->all());
+            $command->handle();
+        } catch (CommandException $commandException) {
+            return redirect()->back()->with('errors', $commandException->getError())->withInput();
+        }
+
+        return redirect()->route('backend.doctors.index')->with('success', 'Doctor created with success.');
     }
 }
