@@ -15,7 +15,6 @@ class UpdateDoctorByIdCommand extends Command
      * @var array
      */
     protected $data;
-    private $id;
 
     /**
      * CreateNewDoctorCommand constructor.
