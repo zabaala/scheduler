@@ -23,7 +23,7 @@
                 {!! Form::model($doctor, $formOptions) !!}
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h1>Doctors</h1>
+                            <h1>Doctor</h1>
                         </div>
 
                         <div class="panel-body">
@@ -55,7 +55,7 @@
                         </div>
 
                         <div class="panel-footer">
-                            <button class="btn btn-success">Create</button>
+                            <button class="btn btn-success">{{ $action=='edit' ? 'Update' : 'Create' }}</button>
                             <a href="#" class="btn">cancel</a>
                         </div>
 

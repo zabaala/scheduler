@@ -41,6 +41,8 @@ class UpdateDoctorByIdValidation extends Validation
      * @return array
      */
     public function messages() {
-        return [];
+        return [
+            'cpf.cpf' => 'CPF is invalid.'
+        ];
     }
 }

@@ -74,6 +74,14 @@
             </div>
         </nav>
 
+        <div class="container">
+            <div class="col-md-12">
+                @if(session('success'))
+                    <div class="alert alert-success">{!! session('success') !!}</div>
+                @endif
+            </div>
+        </div>
+
         @yield('content')
     </div>
 
