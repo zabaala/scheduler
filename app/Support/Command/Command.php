@@ -3,7 +3,6 @@
 namespace App\Support\Command;
 
 use App\Support\Validation\ValidationException;
-use App\Support\ValueObjects\Error;
 
 abstract class Command
 {
@@ -11,16 +10,6 @@ abstract class Command
      * @var array
      */
     protected $data;
-
-    /**
-     * @var bool
-     */
-    protected $fails = false;
-
-    /**
-     * @var Error
-     */
-    private $error;
 
     /**
      * Command constructor.
@@ -34,7 +23,10 @@ abstract class Command
     }
 
     /**
+     * Perform command validation.
+     *
      * @return bool
+     * @throws CommandException
      */
     protected function validate()
     {
@@ -48,31 +40,13 @@ abstract class Command
             $class = $this->$method();
             (new $class($this->data))->validate();
         } catch (ValidationException $validationException) {
-            $this->error = new Error(
+            throw new CommandException(
                 $validationException->getMessages(),
-                $validationException->getCode(),
-                ValidationException::class);
-
-            $this->fails = true;
+                "Validation exception",
+                ValidationException::class
+            );
         }
     }
-
-    /**
-     * @return bool
-     */
-    public function fails()
-    {
-        return $this->fails;
-    }
-
-    /**
-     * @return Error
-     */
-    public function getError()
-    {
-        return $this->error;
-    }
-
 
     /**
      * Handle the command.
@@ -80,6 +54,5 @@ abstract class Command
      * @return mixed
      */
     abstract public function handle();
-
 
 }
