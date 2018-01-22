@@ -2,9 +2,10 @@
 
 namespace App\Domains\Doctor;
 
+use App\Domains\Doctor\Contracts\DoctorRepositoryInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class DbDoctorRepository
+class DbDoctorRepository implements DoctorRepositoryInterface
 {
     /**
      * @var Doctor
@@ -24,6 +25,11 @@ class DbDoctorRepository
         $this->model = $model;
     }
 
+    /**
+     * Get all doctors.
+     *
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
     public function getAll()
     {
         return $this
@@ -40,6 +46,8 @@ class DbDoctorRepository
     }
 
     /**
+     * Create a doctor.
+     *
      * @param $name
      * @param $email
      * @param $cpf
@@ -87,6 +95,8 @@ class DbDoctorRepository
     }
 
     /**
+     * Update a doctor.
+     *
      * @param $id
      * @param $name
      * @param $email
@@ -113,6 +123,7 @@ class DbDoctorRepository
     }
 
     /**
+     * Delete a doctor.
      *
      * @param $id
      * @return bool
