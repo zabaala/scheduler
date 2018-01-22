@@ -3,6 +3,7 @@
 namespace App\Support\Command;
 
 use App\Support\ValueObjects\Error;
+use Illuminate\Support\MessageBag;
 
 class CommandException extends \Exception
 {
@@ -21,7 +22,7 @@ class CommandException extends \Exception
      */
     public function __construct($errors, $message = "", $type = "", $code = 0)
     {
-        $this->error = new Error($errors, $code, $type);
+        $this->error = new MessageBag($errors);
 
         $messages = collect($errors)->flatten()->toArray();
 
