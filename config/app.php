@@ -184,8 +184,10 @@ return [
         /*
          * Others providers...
          */
+        \App\Support\Validation\Custom\CustomValidationsServiceProvider::class,
         \App\Applications\Api\V1\Providers\ApiV1ServiceProvider::class,
         \App\Applications\Backend\Providers\BackendServiceProvider::class
+
     ],
 
     /*
