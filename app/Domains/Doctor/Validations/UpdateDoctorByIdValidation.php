@@ -4,12 +4,16 @@ namespace App\Domains\Doctor\Validations;
 
 use App\Support\Validation\Validation;
 
-class CreateNewDoctorValidation extends Validation
+class UpdateDoctorByIdValidation extends Validation
 {
     /**
      * @var $data
      */
     protected $data;
+    /**
+     * @var
+     */
+    private $id;
 
     /**
      * CreateNewDoctorValidation constructor.
@@ -27,8 +31,8 @@ class CreateNewDoctorValidation extends Validation
     public function rules() {
         return [
             'name' => 'required',
-            'email' => 'required|unique:doctors,email',
-            'cpf' => 'required|unique:doctors|cpf',
+            'email' => 'required|unique:doctors,email,'.$this->data['id'].'|email',
+            'cpf' => 'required|unique:doctors,cpf,'.$this->data['id'].'|cpf',
             'crm' => 'required|min:3'
         ];
     }
@@ -37,8 +41,6 @@ class CreateNewDoctorValidation extends Validation
      * @return array
      */
     public function messages() {
-        return [
-            'cpf.cpf' => 'CPF is invalid.'
-        ];
+        return [];
     }
 }

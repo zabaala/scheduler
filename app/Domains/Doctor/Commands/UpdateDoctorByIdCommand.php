@@ -5,24 +5,26 @@ namespace App\Domains\Doctor\Commands;
 use App\Domains\Doctor\DbDoctorRepository;
 use App\Domains\Doctor\Doctor;
 use App\Domains\Doctor\Validations\CreateNewDoctorValidation;
+use App\Domains\Doctor\Validations\UpdateDoctorByIdValidation;
 use App\Support\Command\Command;
-use App\Support\Cpf;
 
-class CreateNewDoctorCommand extends Command
+class UpdateDoctorByIdCommand extends Command
 {
     /**
      * @var array
      */
     protected $data;
+    private $id;
 
     /**
      * CreateNewDoctorCommand constructor.
      *
+     * @param $id
      * @param $data
      */
-    public function __construct($data)
+    public function __construct($id, $data)
     {
-        $data['cpf'] = (new Cpf($data['cpf']))->clean();
+        $data['id'] = $id;
 
         parent::__construct($data);
         $this->data = collect($data);
@@ -37,7 +39,8 @@ class CreateNewDoctorCommand extends Command
     {
         $doctor = new DbDoctorRepository(new Doctor());
 
-        return $doctor->createNewDoctor(
+        return $doctor->updateDoctorById(
+            $this->data->get('id'),
             $this->data->get('name'),
             $this->data->get('email'),
             $this->data->get('cpf'),
@@ -53,6 +56,8 @@ class CreateNewDoctorCommand extends Command
      */
     protected function validation()
     {
-        return CreateNewDoctorValidation::class;
+        return UpdateDoctorByIdValidation::class;
     }
+
+
 }
