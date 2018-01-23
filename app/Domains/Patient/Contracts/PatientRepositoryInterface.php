@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Domains\Patient;
+namespace App\Domains\Patient\Contracts;
 
+use App\Domains\Patient\Patient;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 interface PatientRepositoryInterface
