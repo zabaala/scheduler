@@ -27,6 +27,23 @@ class DbPatientRepository implements PatientRepositoryInterface
     }
 
     /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function getAllPluckedUp()
+    {
+        return $this
+            ->model
+            ->newQuery()
+            ->select([
+                'patients.name',
+                'patients.id'
+            ])
+            ->whereNull('deleted_at')
+            ->get()
+            ->pluck('name', 'id');
+    }
+
+    /**
      * Get all Patients.
      *
      * @return LengthAwarePaginator
