@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Domains\Patient\Command;
+namespace App\Domains\Patient\Commands;
 
-use App\Domains\Doctor\Validations\CreateNewPatientValidation;
+use App\Domains\Patient\Validations\CreateNewPatientValidation;
 use App\Domains\Patient\DbPatientRepository;
 use App\Domains\Patient\Patient;
-use App\Support\Command\CommandException;
+use App\Support\Command\Command;
 use App\Support\Cpf;
 
-class CreateNewPatientCommand extends CommandException
+class CreateNewPatientCommand extends Command
 {
     /**
      * @var array

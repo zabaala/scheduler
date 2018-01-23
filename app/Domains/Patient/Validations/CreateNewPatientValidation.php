@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Doctor\Validations;
+namespace App\Domains\Patient\Validations;
 
 use App\Support\Validation\Validation;
 use Illuminate\Validation\Rule;
