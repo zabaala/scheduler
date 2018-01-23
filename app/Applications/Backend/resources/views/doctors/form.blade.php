@@ -56,7 +56,7 @@
 
                         <div class="panel-footer">
                             <button class="btn btn-success">{{ $action=='edit' ? 'Update' : 'Create' }}</button>
-                            <a href="#" class="btn">cancel</a>
+                            <a href="{{ route('backend.doctors.index') }}" class="btn">cancel</a>
                         </div>
 
                     </div>

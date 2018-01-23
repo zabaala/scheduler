@@ -3,6 +3,7 @@
 namespace App\Domains\Doctor\Validations;
 
 use App\Support\Validation\Validation;
+use Illuminate\Validation\Rule;
 
 class UpdateDoctorByIdValidation extends Validation
 {
@@ -27,8 +28,21 @@ class UpdateDoctorByIdValidation extends Validation
     public function rules() {
         return [
             'name' => 'required',
-            'email' => 'required|unique:doctors,email,'.$this->data['id'].'|email',
-            'cpf' => 'required|unique:doctors,cpf,'.$this->data['id'].'|cpf',
+            'name' => 'required',
+            'email' => [
+                'required',
+                Rule::unique('doctors', 'email')->where(function ($query) {
+                    $query->whereNull('deleted_at');
+                })->ignore($this->data['id']),
+                'email'
+            ],
+            'cpf' => [
+                'required',
+                Rule::unique('doctors', 'cpf')->where(function ($query) {
+                    $query->whereNull('deleted_at');
+                })->ignore($this->data['id']),
+                'cpf'
+            ],
             'crm' => 'required|min:3'
         ];
     }

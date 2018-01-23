@@ -94,4 +94,16 @@ class DoctorsController extends Controller
 
         return redirect()->route('backend.doctors.index')->with('success', 'Doctor updated with success.');
     }
+
+    /**
+     * Destroy a doctor.
+     *
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy($id)
+    {
+        (new DbDoctorRepository(new Doctor()))->deleteDoctorById($id);
+        return redirect()->route('backend.doctors.index')->with('success', 'Doctor deleted with success.');
+    }
 }
