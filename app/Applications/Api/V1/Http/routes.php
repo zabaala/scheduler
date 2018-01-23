@@ -2,10 +2,4 @@
 
 use Illuminate\Http\Request;
 
-Route::get('test', function () {
-    echo "foo";
-});
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('doctors', 'DoctorsController@index')->name('doctors.index');
