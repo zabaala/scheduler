@@ -12,7 +12,7 @@ $factory->define(Schedule::class, function (Faker $faker) {
     $faker->addProvider(new FakerBR($faker));
 
     return [
-        'status' => array_rand(Schedule::$arrStatus),
+        'status' => array_rand(Schedule::$arrStatusForHumans),
         'doctor_id' => function () {
             return factory(Doctor::class)->create()->id;
         },
