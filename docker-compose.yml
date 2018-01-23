@@ -1,0 +1,46 @@
+# v2 syntax
+version: '2'
+
+volumes:
+  scheduler-mysql-data:
+      driver: local
+  scheduler-test-mysql-data:
+      driver: local
+services:
+  mysql:
+      image: ambientum/mysql:5.7
+      container_name: scheduler-mysql
+      volumes:
+        - scheduler-mysql-data:/var/lib/mysql
+      ports:
+        - "3306:3306"
+      environment:
+        - MYSQL_ROOT_PASSWORD=schedulerapp
+        - MYSQL_DATABASE=schedulerapp
+        - MYSQL_USER=schedulerapp
+        - MYSQL_PASSWORD=schedulerapp
+
+  mysql_test:
+      image: ambientum/mysql:5.7
+      container_name: scheduler-test-mysql
+      volumes:
+        - scheduler-test-mysql-data:/var/lib/mysql
+      ports:
+        - "3307:3306"
+      environment:
+        - MYSQL_ROOT_PASSWORD=schedulerapp-test
+        - MYSQL_DATABASE=schedulerapp-test
+        - MYSQL_USER=schedulerapp-test
+        - MYSQL_PASSWORD=schedulerapp-test
+
+  # PHP (with Caddy)
+  app:
+    image: ambientum/php:7.0-nginx
+    container_name: scheduler-app
+    volumes:
+      - .:/var/www/app
+    ports:
+      - "8000:8080"
+    links:
+      - mysql
+      - mysql_test

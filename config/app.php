@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'America/Sao_Paulo',
 
     /*
     |--------------------------------------------------------------------------
@@ -165,17 +165,29 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
-         * Package Service Providers...
+         * Migrations Service Providers...
          */
+        Migrator\MigrationServiceProvider::class,
+        \App\Domains\Doctor\Providers\DoctorMigrationsServiceProvider::class,
+        \App\Domains\Patient\Providers\PatientMigrationsServiceProvider::class,
+        \App\Domains\Schedule\Providers\ScheduleMigrationsServiceProvider::class,
 
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        App\Core\Providers\AppServiceProvider::class,
+        App\Core\Providers\AuthServiceProvider::class,
+        // App\Core\Providers\BroadcastServiceProvider::class,
+        App\Core\Providers\EventServiceProvider::class,
+//        App\Core\Providers\RouteServiceProvider::class,
+
+        /*
+         * Others providers...
+         */
+        \App\Support\Validation\Custom\CustomValidationsServiceProvider::class,
+        \App\Applications\Api\V1\Providers\ApiV1ServiceProvider::class,
+        \App\Applications\Backend\Providers\BackendServiceProvider::class,
+        Zabaala\Bootstrapme\BootstrapmeServiceProvider::class,
 
     ],
 
@@ -225,6 +237,12 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        /*
+         * Others aliases...
+         */
+        'Form' => Illuminate\Html\FormFacade::class,
+        'Html' => Illuminate\Html\HtmlFacade::class,
 
     ],
 
