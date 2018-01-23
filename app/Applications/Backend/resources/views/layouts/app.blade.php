@@ -46,27 +46,21 @@
                             <li><a href="{{ route('backend.login') }}">Login</a></li>
                             <li><a href="{{ route('backend.register') }}">Register</a></li>
                         @else
-                                <li><a href="#">Doctors</a></li>
-                                <li><a href="#">Patients</a></li>
-                                <li><a href="#">Schedules</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                            <li><a href="{{ route('backend.doctors.index') }}">Doctors</a></li>
+                            <li><a href="#">Patients</a></li>
+                            <li><a href="#">Schedules</a></li>
+                            <li class="active">
+                                <a>{{ Auth::user()->name }}</a>
+                            </li>
+                            <li class="active">
+                                <a href="{{ route('backend.logout') }}"
+                                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="glyphicon glyphicon-log-out"></i>
                                 </a>
 
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{ route('backend.logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('backend.logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
+                                <form id="logout-form" action="{{ route('backend.logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
                             </li>
                         @endguest
                     </ul>
