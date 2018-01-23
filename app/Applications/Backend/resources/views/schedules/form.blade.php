@@ -27,7 +27,7 @@
                 {!! Form::model($schedule, $formOptions) !!}
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h1>Patient</h1>
+                            <h1>Schedule</h1>
                         </div>
 
                         <div class="panel-body">
