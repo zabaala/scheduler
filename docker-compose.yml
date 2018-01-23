@@ -22,7 +22,7 @@ services:
 
   mysql_test:
       image: ambientum/mysql:5.7
-      container_name: scheduler-test-mysql
+      container_name: ambientum-mysql
       volumes:
         - scheduler-test-mysql-data:/var/lib/mysql
       ports:
