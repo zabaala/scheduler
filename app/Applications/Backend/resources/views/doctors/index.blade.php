@@ -13,27 +13,32 @@
                     </div>
 
                     <div class="panel-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th style="width: 10%">#</th>
-                                    <th>Doctor</th>
-                                    <th style="width: 15%">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($doctors as $doctor)
+                        <form method="POST" id="list">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="_method" value="DELETE">
+
+                            <table class="table">
+                                <thead>
                                     <tr>
-                                        <td>{{ $doctor->id }}</td>
-                                        <td><a href="{{ route('backend.doctors.edit', $doctor->id) }}">{{ $doctor->name }}</a></td>
-                                        <td>
-                                            <a href="{{ route('backend.doctors.edit', $doctor->id) }}" class="btn btn-sm btn-default">edit</a>
-                                            <a href="{{ route('backend.doctors.edit', $doctor->id) }}" class="btn btn-sm btn-danger">delete</a>
-                                        </td>
+                                        <th style="width: 10%">#</th>
+                                        <th>Doctor</th>
+                                        <th style="width: 15%">Actions</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach($doctors as $doctor)
+                                        <tr>
+                                            <td>{{ $doctor->id }}</td>
+                                            <td><a href="{{ route('backend.doctors.edit', $doctor->id) }}">{{ $doctor->name }}</a></td>
+                                            <td>
+                                                <a href="{{ route('backend.doctors.edit', $doctor->id) }}" class="btn btn-sm btn-default">edit</a>
+                                                <a href="{{ route('backend.doctors.destroy', $doctor->id) }}" title="{{ $doctor->name }}" class="delete btn btn-sm btn-danger">delete</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </form>
 
                         <div class="text-center">
                             {{ $doctors->links() }}

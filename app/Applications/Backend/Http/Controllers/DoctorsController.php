@@ -4,6 +4,7 @@ namespace App\Applications\Backend\Http\Controllers;
 
 use App\Core\Http\Controllers\Controller;
 use App\Domains\Doctor\Commands\CreateNewDoctorCommand;
+use App\Domains\Doctor\Commands\UpdateDoctorByIdCommand;
 use App\Domains\Doctor\DbDoctorRepository;
 use App\Domains\Doctor\Doctor;
 use App\Support\Command\CommandException;
@@ -45,6 +46,8 @@ class DoctorsController extends Controller
     }
 
     /**
+     * Store a new doctor.
+     *
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -58,5 +61,49 @@ class DoctorsController extends Controller
         }
 
         return redirect()->route('backend.doctors.index')->with('success', 'Doctor created with success.');
+    }
+
+    /**
+     * Edit a doctor.
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit($id)
+    {
+        $action = 'edit';
+        $doctor = (new DbDoctorRepository(new Doctor()))->findDoctorById($id);
+
+        return view('backend::doctors.form', compact('action', 'doctor'));
+    }
+
+    /**
+     * Store a new doctor.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request, $id)
+    {
+        try {
+            $command = new UpdateDoctorByIdCommand($id, $request->all());
+            $command->handle();
+        } catch (CommandException $commandException) {
+            return redirect()->back()->with('errors', $commandException->getError())->withInput();
+        }
+
+        return redirect()->route('backend.doctors.index')->with('success', 'Doctor updated with success.');
+    }
+
+    /**
+     * Destroy a doctor.
+     *
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy($id)
+    {
+        (new DbDoctorRepository(new Doctor()))->deleteDoctorById($id);
+        return redirect()->route('backend.doctors.index')->with('success', 'Doctor deleted with success.');
     }
 }
