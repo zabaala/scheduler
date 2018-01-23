@@ -20,10 +20,21 @@ class Schedule extends Model
      *
      * @var array
      */
-    public static $arrStatus = [
+    public static $arrStatusForHumans = [
         self::STATUS_PENDING => 'Pending',
         self::STATUS_COMPLETED => 'Completed',
         self::STATUS_CANCELED => 'Canceled',
+    ];
+
+    /**
+     * Status list for humans.
+     *
+     * @var array
+     */
+    public static $arrStatus = [
+        self::STATUS_PENDING,
+        self::STATUS_COMPLETED,
+        self::STATUS_CANCELED,
     ];
 
     /**
