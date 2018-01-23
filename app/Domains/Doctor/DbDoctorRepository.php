@@ -26,6 +26,23 @@ class DbDoctorRepository implements DoctorRepositoryInterface
     }
 
     /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function getAllPluckedUp()
+    {
+        return $this
+            ->model
+            ->newQuery()
+            ->select([
+                'doctors.name',
+                'doctors.id'
+            ])
+            ->whereNull('deleted_at')
+            ->get()
+            ->pluck('name', 'id');
+    }
+
+    /**
      * Get all doctors.
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
