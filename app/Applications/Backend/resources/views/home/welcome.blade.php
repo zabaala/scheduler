@@ -99,7 +99,7 @@
                 </div>
 
                 <div class="badges">
-                    <a href="https://gitlab.com/zabaala/scheduler/badges/challenge/" target="_blank"><img src="https://gitlab.com/zabaala/scheduler/badges/challenge/build.svg" alt=""></a>
+                    <a href="https://gitlab.com/zabaala/scheduler/badges/master/" target="_blank"><img src="https://gitlab.com/zabaala/scheduler/badges/master/build.svg" alt=""></a>
                     <a class="badge-align" href="https://www.codacy.com/app/zabaala/scheduler?utm_source=gitlab.com&amp;utm_medium=referral&amp;utm_content=zabaala/scheduler&amp;utm_campaign=Badge_Grade" target="_blank"><img src="https://api.codacy.com/project/badge/Grade/40a57d730910461a8d5f00011c1347b9"/></a>
                 </div>
             </div>
