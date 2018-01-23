@@ -9,4 +9,4 @@ Route::get('/', function () {
 
 Route::resource('doctors', 'DoctorsController');
 Route::resource('patients', 'PatientsController');
-Route::resource('schedules', 'PatientsController');
+Route::resource('schedules', 'SchedulesController');
