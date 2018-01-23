@@ -47,8 +47,8 @@
                             <li><a href="{{ route('backend.register') }}">Register</a></li>
                         @else
                             <li><a href="{{ route('backend.doctors.index') }}">Doctors</a></li>
-                            <li><a href="#">Patients</a></li>
-                            <li><a href="#">Schedules</a></li>
+                            <li><a href="{{ route('backend.patients.index') }}">Patients</a></li>
+                            <li><a href="{{ route('backend.schedules.index') }}">Schedules</a></li>
                             <li class="active">
                                 <a>{{ Auth::user()->name }}</a>
                             </li>

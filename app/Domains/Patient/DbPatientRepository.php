@@ -2,6 +2,7 @@
 
 namespace App\Domains\Patient;
 
+use App\Domains\Patient\Contracts\PatientRepositoryInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
