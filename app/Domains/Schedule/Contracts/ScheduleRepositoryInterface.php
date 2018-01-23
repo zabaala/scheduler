@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Domains\Schedule;
+namespace App\Domains\Schedule\Contracts;
+
+use App\Domains\Schedule\Schedule;
 
 interface ScheduleRepositoryInterface
 {

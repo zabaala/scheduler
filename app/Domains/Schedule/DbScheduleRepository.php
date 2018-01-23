@@ -2,6 +2,7 @@
 
 namespace App\Domains\Schedule;
 
+use App\Domains\Schedule\Contracts\ScheduleRepositoryInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class DbScheduleRepository implements ScheduleRepositoryInterface
