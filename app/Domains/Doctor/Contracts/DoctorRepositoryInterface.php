@@ -12,6 +12,11 @@ interface DoctorRepositoryInterface
     public function __construct(Doctor $model);
 
     /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function getAllPluckedUp();
+
+    /**
      * Get all doctors.
      *
      * @param string $sortBy

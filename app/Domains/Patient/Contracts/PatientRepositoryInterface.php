@@ -15,6 +15,11 @@ interface PatientRepositoryInterface
     public function __construct(Patient $patient);
 
     /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function getAllPluckedUp();
+
+    /**
      * Get all Patients.
      *
      * @param string $sortBy

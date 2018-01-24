@@ -3,12 +3,15 @@
 namespace App\Applications\Backend\Http\Controllers;
 
 use App\Core\Http\Controllers\Controller;
+use App\Domains\Doctor\Contracts\DoctorRepositoryInterface;
 use App\Domains\Doctor\DbDoctorRepository;
 use App\Domains\Doctor\Doctor;
+use App\Domains\Patient\Contracts\PatientRepositoryInterface;
 use App\Domains\Patient\DbPatientRepository;
 use App\Domains\Patient\Patient;
 use App\Domains\Schedule\Commands\CreateNewScheduleCommand;
 use App\Domains\Schedule\Commands\UpdateScheduleByIdCommand;
+use App\Domains\Schedule\Contracts\ScheduleRepositoryInterface;
 use App\Domains\Schedule\DbScheduleRepository;
 use App\Domains\Schedule\Schedule;
 use App\Support\Command\CommandException;
@@ -17,11 +20,26 @@ use Illuminate\Http\Request;
 class SchedulesController extends Controller
 {
     /**
-     * SchedulesController constructor.
+     * @var PatientRepositoryInterface
      */
-    public function __construct()
+    private $patientRepository;
+    /**
+     * @var DoctorRepositoryInterface
+     */
+    private $doctorRepository;
+
+    /**
+     * SchedulesController constructor.
+     * @param PatientRepositoryInterface $patientRepository
+     * @param DoctorRepositoryInterface $doctorRepository
+     */
+    public function __construct(
+        PatientRepositoryInterface $patientRepository,
+        DoctorRepositoryInterface $doctorRepository)
     {
         $this->middleware(['auth']);
+        $this->patientRepository = $patientRepository;
+        $this->doctorRepository = $doctorRepository;
     }
 
     /**
@@ -29,7 +47,7 @@ class SchedulesController extends Controller
      */
     private function doctors()
     {
-        return (new DbDoctorRepository(new Doctor()))->getAllPluckedUp();
+        return $this->doctorRepository->getAllPluckedUp();
     }
 
     /**
@@ -37,7 +55,7 @@ class SchedulesController extends Controller
      */
     private function patients()
     {
-        return (new DbPatientRepository(new Patient()))->getAllPluckedUp();
+        return $this->patientRepository->getAllPluckedUp();
     }
 
     /**
@@ -51,11 +69,12 @@ class SchedulesController extends Controller
     /**
      * Show all schedules.
      *
+     * @param ScheduleRepositoryInterface $scheduleRepository
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(ScheduleRepositoryInterface $scheduleRepository)
     {
-        $schedules = (new DbScheduleRepository(new Schedule()))->getAll('schedules.id', 'desc');
+        $schedules = $scheduleRepository->getAll('schedules.id', 'desc');
         $total = $schedules->total();
 
         return view('backend::schedules.index', compact('schedules', 'total')
@@ -102,13 +121,14 @@ class SchedulesController extends Controller
     /**
      * Edit a schedule.
      *
+     * @param ScheduleRepositoryInterface $scheduleRepository
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(ScheduleRepositoryInterface $scheduleRepository, $id)
     {
         $action = 'edit';
-        $schedule = (new DbScheduleRepository(new Schedule()))->findScheduleById($id);
+        $schedule = $scheduleRepository->findScheduleById($id);
 
         $patients = $this->patients();
         $doctors = $this->doctors();
@@ -141,12 +161,13 @@ class SchedulesController extends Controller
     /**
      * Destroy a schedule.
      *
+     * @param ScheduleRepositoryInterface $scheduleRepository
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(ScheduleRepositoryInterface $scheduleRepository, $id)
     {
-        (new DbScheduleRepository(new Schedule()))->deleteScheduleById($id);
+        $scheduleRepository->deleteScheduleById($id);
         return redirect()->route('backend.schedules.index')->with('success', 'Schedule deleted with success.');
     }
 }
