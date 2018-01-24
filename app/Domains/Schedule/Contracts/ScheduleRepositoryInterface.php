@@ -14,9 +14,11 @@ interface ScheduleRepositoryInterface
     /**
      * Get all schedules.
      *
+     * @param string $sortBy
+     * @param string $orientation
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getAll();
+    public function getAll($sortBy = 'name', $orientation = 'asc');
 
     /**
      * Create a new schedule.

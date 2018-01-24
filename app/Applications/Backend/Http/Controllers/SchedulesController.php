@@ -55,7 +55,7 @@ class SchedulesController extends Controller
      */
     public function index()
     {
-        $schedules = (new DbScheduleRepository(new Schedule()))->getAll();
+        $schedules = (new DbScheduleRepository(new Schedule()))->getAll('id', 'desc');
         $total = $schedules->total();
 
         return view('backend::schedules.index', compact('schedules', 'total')
