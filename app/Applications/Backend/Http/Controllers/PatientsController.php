@@ -27,7 +27,7 @@ class PatientsController extends Controller
      */
     public function index()
     {
-        $patients = (new DbPatientRepository(new Patient()))->getAll();
+        $patients = (new DbPatientRepository(new Patient()))->getAll('id', 'desc');
         $total = $patients->total();
 
         return view('backend::patients.index', compact('patients', 'total'));

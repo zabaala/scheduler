@@ -40,15 +40,18 @@ class DbPatientRepository implements PatientRepositoryInterface
             ])
             ->whereNull('deleted_at')
             ->get()
+            ->sortBy('name')
             ->pluck('name', 'id');
     }
 
     /**
      * Get all Patients.
      *
+     * @param string $sortBy
+     * @param string $orientation
      * @return LengthAwarePaginator
      */
-    public function getAll()
+    public function getAll($sortBy = 'name', $orientation = 'asc')
     {
         return $this
             ->model
@@ -59,7 +62,8 @@ class DbPatientRepository implements PatientRepositoryInterface
                 'patients.email',
                 'patients.cpf',
             ])
-            ->whereRaw('(patients.deleted_at is null or patients.deleted_at = "")')
+            ->whereNull('deleted_at')
+            ->orderBy($sortBy, $orientation)
             ->paginate($this->perPage);
     }
 

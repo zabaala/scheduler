@@ -17,9 +17,11 @@ interface PatientRepositoryInterface
     /**
      * Get all Patients.
      *
+     * @param string $sortBy
+     * @param string $orientation
      * @return LengthAwarePaginator
      */
-    public function getAll();
+    public function getAll($sortBy = 'name', $orientation = 'asc');
 
     /**
      * Create a new patient
