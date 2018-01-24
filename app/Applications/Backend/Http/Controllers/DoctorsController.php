@@ -6,8 +6,6 @@ use App\Core\Http\Controllers\Controller;
 use App\Domains\Doctor\Commands\CreateNewDoctorCommand;
 use App\Domains\Doctor\Commands\UpdateDoctorByIdCommand;
 use App\Domains\Doctor\Contracts\DoctorRepositoryInterface;
-use App\Domains\Doctor\DbDoctorRepository;
-use App\Domains\Doctor\Doctor;
 use App\Support\Command\CommandException;
 use Illuminate\Http\Request;
 
