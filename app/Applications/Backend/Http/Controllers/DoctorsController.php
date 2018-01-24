@@ -5,6 +5,7 @@ namespace App\Applications\Backend\Http\Controllers;
 use App\Core\Http\Controllers\Controller;
 use App\Domains\Doctor\Commands\CreateNewDoctorCommand;
 use App\Domains\Doctor\Commands\UpdateDoctorByIdCommand;
+use App\Domains\Doctor\Contracts\DoctorRepositoryInterface;
 use App\Domains\Doctor\DbDoctorRepository;
 use App\Domains\Doctor\Doctor;
 use App\Support\Command\CommandException;
@@ -23,11 +24,12 @@ class DoctorsController extends Controller
     /**
      * Show all doctors.
      *
+     * @param DoctorRepositoryInterface $doctorRepository
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(DoctorRepositoryInterface $doctorRepository)
     {
-        $doctors = (new DbDoctorRepository(new Doctor()))->getAll('id', 'desc');
+        $doctors = $doctorRepository->getAll('id', 'desc');
         $total = $doctors->total();
 
         return view('backend::doctors.index', compact('doctors', 'total'));
@@ -66,13 +68,14 @@ class DoctorsController extends Controller
     /**
      * Edit a doctor.
      *
+     * @param DoctorRepositoryInterface $doctorRepository
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(DoctorRepositoryInterface $doctorRepository, $id)
     {
         $action = 'edit';
-        $doctor = (new DbDoctorRepository(new Doctor()))->findDoctorById($id);
+        $doctor = $doctorRepository->findDoctorById($id);
 
         return view('backend::doctors.form', compact('action', 'doctor'));
     }
@@ -81,6 +84,7 @@ class DoctorsController extends Controller
      * Store a new doctor.
      *
      * @param Request $request
+     * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
@@ -98,12 +102,13 @@ class DoctorsController extends Controller
     /**
      * Destroy a doctor.
      *
+     * @param DoctorRepositoryInterface $doctorRepository
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(DoctorRepositoryInterface $doctorRepository, $id)
     {
-        (new DbDoctorRepository(new Doctor()))->deleteDoctorById($id);
+        $doctorRepository->deleteDoctorById($id);
         return redirect()->route('backend.doctors.index')->with('success', 'Doctor deleted with success.');
     }
 }
