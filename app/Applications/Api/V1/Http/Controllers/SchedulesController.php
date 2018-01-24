@@ -13,6 +13,6 @@ class SchedulesController extends Controller
      */
     public function index()
     {
-        return (new DbScheduleRepository(new Schedule()))->getAll();
+        return (new DbScheduleRepository(new Schedule()))->getAll('schedules.id', 'asc');
     }
 }

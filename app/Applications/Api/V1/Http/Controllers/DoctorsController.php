@@ -13,6 +13,6 @@ class DoctorsController extends Controller
      */
     public function index()
     {
-        return (new DbDoctorRepository(new Doctor()))->getAll();
+        return (new DbDoctorRepository(new Doctor()))->getAll('name', 'asc');
     }
 }
