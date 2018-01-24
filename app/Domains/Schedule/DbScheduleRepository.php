@@ -32,7 +32,7 @@ class DbScheduleRepository implements ScheduleRepositoryInterface
      * @param string $orientation
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getAll($sortBy = 'name', $orientation = 'asc')
+    public function getAll($sortBy = 'schedules.id', $orientation = 'asc')
     {
         return $this
             ->model
@@ -51,6 +51,8 @@ class DbScheduleRepository implements ScheduleRepositoryInterface
             ->whereRaw('(schedules.deleted_at is null or schedules.deleted_at = "")')
             ->leftJoin('doctors', 'doctors.id', '=', 'schedules.doctor_id')
             ->leftJoin('patients', 'patients.id', '=', 'schedules.patient_id')
+            ->whereNull('schedules.deleted_at')
+            ->orderBy($sortBy, $orientation)
             ->paginate($this->perPage);
     }
 
