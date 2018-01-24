@@ -5,8 +5,7 @@ namespace App\Applications\Backend\Http\Controllers;
 use App\Core\Http\Controllers\Controller;
 use App\Domains\Patient\Commands\CreateNewPatientCommand;
 use App\Domains\Patient\Commands\UpdatePatientByIdCommand;
-use App\Domains\Patient\DbPatientRepository;
-use App\Domains\Patient\Patient;
+use App\Domains\Patient\Contracts\PatientRepositoryInterface;
 use App\Support\Command\CommandException;
 use Illuminate\Http\Request;
 
@@ -23,11 +22,12 @@ class PatientsController extends Controller
     /**
      * Show all patients.
      *
+     * @param PatientRepositoryInterface $patientRepository
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(PatientRepositoryInterface $patientRepository)
     {
-        $patients = (new DbPatientRepository(new Patient()))->getAll('id', 'desc');
+        $patients = $patientRepository->getAll('id', 'desc');
         $total = $patients->total();
 
         return view('backend::patients.index', compact('patients', 'total'));
@@ -66,13 +66,14 @@ class PatientsController extends Controller
     /**
      * Edit a patient.
      *
+     * @param PatientRepositoryInterface $patientRepository
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(PatientRepositoryInterface $patientRepository, $id)
     {
         $action = 'edit';
-        $patient = (new DbPatientRepository(new Patient()))->findPatientById($id);
+        $patient = $patientRepository->findPatientById($id);
 
         return view('backend::patients.form', compact('action', 'patient'));
     }
@@ -98,12 +99,13 @@ class PatientsController extends Controller
     /**
      * Destroy a patient.
      *
+     * @param PatientRepositoryInterface $patientRepository
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(PatientRepositoryInterface $patientRepository, $id)
     {
-        (new DbPatientRepository(new Patient()))->deletePatientById($id);
+        $patientRepository->deletePatientById($id);
         return redirect()->route('backend.patients.index')->with('success', 'Patient deleted with success.');
     }
 }
